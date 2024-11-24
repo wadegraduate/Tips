@@ -15,9 +15,9 @@ struct CalculationView: View {
     var body: some View {
         NavigationStack {
             Form {
-                billTotals
-                billInformation
+                amount
                 tipAmount
+                billTotals
                 reset
             }
             .scrollContentBackground(.hidden)
@@ -30,7 +30,7 @@ struct CalculationView: View {
     }
     
     
-    var billInformation: some View {
+    var amount: some View {
         Section {
             HStack {
                 Text(defaultCurrency + "$")
