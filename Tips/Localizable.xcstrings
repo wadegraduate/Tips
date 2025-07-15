@@ -10,6 +10,9 @@
     "%@ will be permanently deleted?" : {
 
     },
+    "0" : {
+
+    },
     "Add a new task" : {
 
     },
@@ -31,7 +34,13 @@
     "Confirm" : {
 
     },
+    "Conversion" : {
+
+    },
     "Created on" : {
+
+    },
+    "Currency Conversion" : {
 
     },
     "Delete" : {
@@ -43,13 +52,31 @@
     "Enter Amount" : {
 
     },
+    "Enter token name or token contract address" : {
+
+    },
     "Enter your text" : {
+
+    },
+    "In Wallet" : {
 
     },
     "Label" : {
 
     },
     "Note" : {
+
+    },
+    "Pay" : {
+
+    },
+    "Pay amount" : {
+
+    },
+    "Receive" : {
+
+    },
+    "Receive amount" : {
 
     },
     "Reset" : {
@@ -62,6 +89,9 @@
 
     },
     "Subtotal" : {
+
+    },
+    "Swap USD to cryptos via SafePal banking gateway with 0 service fee." : {
 
     },
     "Tip" : {

@@ -15,6 +15,8 @@
 		0246E9482CBD99CC00E01320 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246E9452CBD99CC00E01320 /* View+Keyboard.swift */; };
 		0246E9492CBD99CC00E01320 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246E9462CBD99CC00E01320 /* String+Currency.swift */; };
 		0246E94A2CBD99CC00E01320 /* Double+toString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246E9472CBD99CC00E01320 /* Double+toString.swift */; };
+		02639E1E2DF3485400D6CAF7 /* CurrencyConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02639E1D2DF3484E00D6CAF7 /* CurrencyConversionView.swift */; };
+		02639E202DF354C600D6CAF7 /* CurrencySearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02639E1F2DF354B700D6CAF7 /* CurrencySearchListView.swift */; };
 		0272AA662B8AC716000869F1 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272AA652B8AC716000869F1 /* CalculationView.swift */; };
 		0272AA682B8AC721000869F1 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272AA672B8AC721000869F1 /* CalculationViewModel.swift */; };
 		0272AA712B8ACEA8000869F1 /* LabeledAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272AA702B8ACEA8000869F1 /* LabeledAmountView.swift */; };
@@ -27,6 +29,8 @@
 		02ABE0602BB75FEE00FB27A0 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABE05F2BB75FEE00FB27A0 /* TaskItem.swift */; };
 		02ABE0622BB7628200FB27A0 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABE0612BB7628200FB27A0 /* TodoListViewModel.swift */; };
 		02ABE0642BB7674400FB27A0 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABE0632BB7674400FB27A0 /* TaskRow.swift */; };
+		02B6F5AE2E25E00400D3446A /* CryptoCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6F5AD2E25E00200D3446A /* CryptoCurrency.swift */; };
+		02CFB0D32E247A4600FB9A8B /* CurrencySearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFB0D22E247A4600FB9A8B /* CurrencySearchListViewModel.swift */; };
 		02DE03BB2B8AC0E3008FA65A /* tipsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE03BA2B8AC0E3008FA65A /* tipsUITests.swift */; };
 		02DE03BD2B8AC0E3008FA65A /* tipsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE03BC2B8AC0E3008FA65A /* tipsUITestsLaunchTests.swift */; };
 		02DE03D22B8AC122008FA65A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 02DE03CA2B8AC122008FA65A /* Localizable.xcstrings */; };
@@ -80,6 +84,8 @@
 		0246E9452CBD99CC00E01320 /* View+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
 		0246E9462CBD99CC00E01320 /* String+Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		0246E9472CBD99CC00E01320 /* Double+toString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+toString.swift"; sourceTree = "<group>"; };
+		02639E1D2DF3484E00D6CAF7 /* CurrencyConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionView.swift; sourceTree = "<group>"; };
+		02639E1F2DF354B700D6CAF7 /* CurrencySearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySearchListView.swift; sourceTree = "<group>"; };
 		0272AA652B8AC716000869F1 /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
 		0272AA672B8AC721000869F1 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
 		0272AA702B8ACEA8000869F1 /* LabeledAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledAmountView.swift; sourceTree = "<group>"; };
@@ -92,7 +98,9 @@
 		02ABE05F2BB75FEE00FB27A0 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		02ABE0612BB7628200FB27A0 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
 		02ABE0632BB7674400FB27A0 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		02B6F5AD2E25E00200D3446A /* CryptoCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrency.swift; sourceTree = "<group>"; };
 		02C44A562B95893600C1E4BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Tips/Info.plist; sourceTree = "<group>"; };
+		02CFB0D22E247A4600FB9A8B /* CurrencySearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySearchListViewModel.swift; sourceTree = "<group>"; };
 		02DE039C2B8AC0E1008FA65A /* TipGenius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipGenius.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02DE03AC2B8AC0E3008FA65A /* TipGeniusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TipGeniusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02DE03B62B8AC0E3008FA65A /* TipGeniusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TipGeniusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +148,7 @@
 		0246E92F2C27973C00E01320 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				02B6F5AC2E25DFEE00D3446A /* Model */,
 				0246E9362C27D47F00E01320 /* SchemaVersionManager.swift */,
 			);
 			path = Data;
@@ -167,9 +176,20 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
+		02639E212DF4AB2C00D6CAF7 /* CurrencyConversion */ = {
+			isa = PBXGroup;
+			children = (
+				02CFB0D22E247A4600FB9A8B /* CurrencySearchListViewModel.swift */,
+				02639E1F2DF354B700D6CAF7 /* CurrencySearchListView.swift */,
+				02639E1D2DF3484E00D6CAF7 /* CurrencyConversionView.swift */,
+			);
+			path = CurrencyConversion;
+			sourceTree = "<group>";
+		};
 		0272AA642B8AC70A000869F1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				02639E212DF4AB2C00D6CAF7 /* CurrencyConversion */,
 				02ABE05C2BB75F8A00FB27A0 /* TodoList */,
 				02ABE05B2BB75F7D00FB27A0 /* Calculation */,
 			);
@@ -228,6 +248,14 @@
 				02ECE02A2CD9D5A3004335A0 /* FloatingButton.swift */,
 			);
 			path = TodoList;
+			sourceTree = "<group>";
+		};
+		02B6F5AC2E25DFEE00D3446A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02B6F5AD2E25E00200D3446A /* CryptoCurrency.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		02DE03932B8AC0E1008FA65A = {
@@ -448,6 +476,8 @@
 				02ABE0622BB7628200FB27A0 /* TodoListViewModel.swift in Sources */,
 				02ECE02B2CD9D5A3004335A0 /* FloatingButton.swift in Sources */,
 				02ABE0642BB7674400FB27A0 /* TaskRow.swift in Sources */,
+				02B6F5AE2E25E00400D3446A /* CryptoCurrency.swift in Sources */,
+				02639E202DF354C600D6CAF7 /* CurrencySearchListView.swift in Sources */,
 				02DE1A792BCDBACC0027CADB /* TodoListService.swift in Sources */,
 				02ABE0602BB75FEE00FB27A0 /* TaskItem.swift in Sources */,
 				0246E93B2CB4EDFF00E01320 /* NewToDoTaskSheetView.swift in Sources */,
@@ -462,10 +492,12 @@
 				0246E94A2CBD99CC00E01320 /* Double+toString.swift in Sources */,
 				0272AA662B8AC716000869F1 /* CalculationView.swift in Sources */,
 				0295079D2CE1B382005961A9 /* StringHelper.swift in Sources */,
+				02CFB0D32E247A4600FB9A8B /* CurrencySearchListViewModel.swift in Sources */,
 				0246E9482CBD99CC00E01320 /* View+Keyboard.swift in Sources */,
 				0246E9372C27D47F00E01320 /* SchemaVersionManager.swift in Sources */,
 				02DE1A742BC9BB190027CADB /* TaskDetailView.swift in Sources */,
 				02DE03D62B8AC122008FA65A /* LaunchView.swift in Sources */,
+				02639E1E2DF3485400D6CAF7 /* CurrencyConversionView.swift in Sources */,
 				0246E9492CBD99CC00E01320 /* String+Currency.swift in Sources */,
 				0246E93E2CB4F5FD00E01320 /* CustomButtonSnippet.swift in Sources */,
 				02DE1A762BCC43630027CADB /* Binding.swift in Sources */,

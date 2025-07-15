@@ -25,6 +25,12 @@ struct MainTabBarView: View {
                     Label(LocalizedString("To-Do List"), systemImage: "list.bullet")
                 }
                 .tag(Tab.toDoList)
+            
+            CurrencyConversionView()
+                .tabItem {
+                    Label(LocalizedString("Currency Conversion"), systemImage: "arrow.left.arrow.right.circle")
+                }
+                .tag(Tab.currencyConversion)
         }
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 enum Tab: CaseIterable {
     case tipCalculator
     case toDoList
+    case currencyConversion
  
     
     var defaultImage: String {
@@ -17,6 +18,8 @@ enum Tab: CaseIterable {
         case .tipCalculator:
             return "img_tabbar_home"
         case .toDoList:
+            return "img_tabbar_trade"
+        case .currencyConversion:
             return "img_tabbar_trade"
         }
     }
@@ -27,6 +30,8 @@ enum Tab: CaseIterable {
             return "img_tabbar_home_selected"
         case .toDoList:
             return "img_tabbar_trade_selected"
+        case .currencyConversion:
+            return "img_tabbar_trade_selected"
         }
     }
     
@@ -36,6 +41,8 @@ enum Tab: CaseIterable {
             return "Tip Calculator"
         case .toDoList:
             return "To-Do List"
+        case .currencyConversion:
+            return "Currency Conversion"
         }
     }
 }
