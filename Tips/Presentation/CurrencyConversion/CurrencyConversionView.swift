@@ -7,21 +7,14 @@
 
 import SwiftUI
 
+enum Field {
+    case pay
+    case receive
+}
+
 struct CurrencyConversionView: View {
-    // State variables to hold selected currencies and amounts
-    @State private var payCurrency: CryptoCurrency = .default
-    @State private var receiveCurrency: CryptoCurrency = CryptoCurrency(icon: "btc_icon", name: "BTC", network: "Bitcoin", amount: nil, iconColor: .orange)
-    @State private var payAmountString: String = "0"
-    @State private var receiveAmountString: String = "0"
-    @State private var selectedCrypto: CryptoCurrency = .default
-    
-    // Dummy list of available currencies for pickers
-    let availableCurrencies: [CryptoCurrency] = [
-        CryptoCurrency(icon: "eth_icon", name: "ETH", network: "BEP20", address: "0x2170...f933f8", amount: "1", isFavorite: true, iconColor: .white),
-        CryptoCurrency(icon: "btc_icon", name: "BTC", network: "Bitcoin", amount: nil, iconColor: .orange),
-        CryptoCurrency(icon: "usdt_icon", name: "USDT", network: "TRC20", amount: "1000.0", iconColor: .green)
-        // Add more currencies as needed
-    ]
+    @StateObject private var viewModel = CurrencyConversionViewModel()
+    @FocusState private var focusedField: Field?
     
     var body: some View {
         NavigationStack {
@@ -32,36 +25,72 @@ struct CurrencyConversionView: View {
                 
                 VStack(spacing: 0) {
                     PayView(
-                        amountString: $payAmountString,
-                        selectedCurrency: $payCurrency,
-                        availableCurrencies: availableCurrencies
+                        amountString: $viewModel.payAmountString,
+                        selectedCurrency: $viewModel.payCurrency,
+                        availableCurrencies: viewModel.availableCurrencies,
+                        viewModel: viewModel,
+                        focusedField: $focusedField
                     )
                     .padding(.horizontal)
                     .padding(.top, 20)
                     
                     Spacer().frame(height: 0) // Placeholder for swap button overlap
-                    SwapButton(
-                        payCurrency: $payCurrency,
-                        receiveCurrency: $receiveCurrency,
-                        payAmountString: $payAmountString,
-                        receiveAmountString: $receiveAmountString
-                    )
+                    SwapButton(viewModel: viewModel)
                         .padding(.vertical, -15) // Negative padding to overlap slightly
                         .zIndex(1) // Ensure button is on top
                     
                     ReceiveView(
-                        selectedCurrency: $receiveCurrency,
-                        amountString: $receiveAmountString,
-                        availableCurrencies: availableCurrencies
+                        selectedCurrency: $viewModel.receiveCurrency,
+                        amountString: $viewModel.receiveAmountString,
+                        availableCurrencies: viewModel.availableCurrencies,
+                        viewModel: viewModel,
+                        focusedField: $focusedField
                     )
                     .padding(.horizontal)
                     .padding(.bottom, 20)
+                    
+                    // Loading indicator
+                    if viewModel.isLoading {
+                        HStack {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            Text("Fetching exchange rate...")
+                                .foregroundColor(.gray)
+                        }
+                        .padding()
+                    }
+                    
+                    // Error message
+                    if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                            .padding()
+                    }
                     
                     Spacer()
                 }
             }
             .foregroundColor(.white) // Default text color
             .navigationBarTitle(LocalizedString("Conversion"))
+            .task {
+                await viewModel.fetchExchangeRate()
+            }
+            .onChange(of: viewModel.payCurrency) { _ in
+                Task {
+                    await viewModel.fetchExchangeRate()
+                }
+            }
+            .onChange(of: viewModel.receiveCurrency) { _ in
+                Task {
+                    await viewModel.fetchExchangeRate()
+                }
+            }
+//            .onChange(of: focusedField) { newFocus in
+//                // Update the ViewModel's editing state based on focus
+//                viewModel.isPayEditing = newFocus == .pay
+//                viewModel.isReceiveEditing = newFocus == .receive
+//            }
         }
     }
 }
@@ -70,8 +99,10 @@ struct CurrencyConversionView: View {
 
 struct PayView: View {
     @Binding var amountString: String
-    @Binding var selectedCurrency: CryptoCurrency
-    let availableCurrencies: [CryptoCurrency]
+    @Binding var selectedCurrency: FiatCurrency
+    let availableCurrencies: [FiatCurrency]
+    let viewModel: CurrencyConversionViewModel
+    @FocusState.Binding var focusedField: Field?
     @State private var isShowingCurrencySheet = false
     
     var body: some View {
@@ -83,18 +114,8 @@ struct PayView: View {
                 
                 Spacer()
                 
-                PercentageButton(label: "MIN", action: {
-                    // TODO: Implement MIN logic
-                    amountString = "0.01" // Example
-                })
                 PercentageButton(label: "50%", action: {
-                    // TODO: Implement 50% logic
-                    let halfBalance = (Double(selectedCurrency.amount ?? "0") ?? 0) / 2
-                    amountString = String(format: "%.2f", halfBalance)
-                })
-                PercentageButton(label: "MAX", action: {
-                    // TODO: Implement MAX logic
-                    amountString = selectedCurrency.amount ?? "0"
+                    viewModel.setHalfAmount()
                 })
             }
             
@@ -112,8 +133,9 @@ struct PayView: View {
                     .keyboardType(.decimalPad)
                     .frame(maxWidth: .infinity, alignment: .trailing) // Ensure it takes available space
                     .accessibilityLabel("Pay amount")
+                    .focused($focusedField, equals: .pay)
+                
             }
-            
             .cornerRadius(12)
             .sheet(isPresented: $isShowingCurrencySheet) {
                 CurrencySearchListView(selectedCrypto: $selectedCurrency)
@@ -135,9 +157,11 @@ struct PayView: View {
 // MARK: - Receive Section View
 
 struct ReceiveView: View {
-    @Binding var selectedCurrency: CryptoCurrency
+    @Binding var selectedCurrency: FiatCurrency
     @Binding var amountString: String
-    let availableCurrencies: [CryptoCurrency]
+    let availableCurrencies: [FiatCurrency]
+    let viewModel: CurrencyConversionViewModel
+    @FocusState.Binding var focusedField: Field?
     @State private var isShowingCurrencySheet = false
     
     var body: some View {
@@ -159,11 +183,13 @@ struct ReceiveView: View {
                 
                 Spacer()
                 
-                Text(amountString) // Display only for receive, not editable here
+                TextField("0", text: $amountString)
                     .font(.system(size: 36, weight: .medium))
                     .multilineTextAlignment(.trailing)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .keyboardType(.decimalPad)
+                    .frame(maxWidth: .infinity, alignment: .trailing) // Ensure it takes available space
                     .accessibilityLabel("Receive amount")
+                    .focused($focusedField, equals: .receive)
                 
             }
             .background(Color(white: 0.15))
@@ -187,8 +213,8 @@ struct ReceiveView: View {
 // MARK: - Currency Selector View (Reusable Component)
 
 struct CurrencySelectorView: View {
-    @Binding var selectedCurrency: CryptoCurrency
-    let availableCurrencies: [CryptoCurrency]
+    @Binding var selectedCurrency: FiatCurrency
+    let availableCurrencies: [FiatCurrency]
     var onCurrencySelectorTapped: (() -> Void)? = nil
     
     var body: some View {
@@ -207,9 +233,6 @@ struct CurrencySelectorView: View {
                             .font(.caption)
                     }
                     .foregroundColor(.white)
-                    Text(selectedCurrency.network)
-                        .font(.caption)
-                        .foregroundColor(.gray)
                 }
             }
         }
@@ -240,15 +263,11 @@ struct PercentageButton: View {
 // MARK: - Swap Button
 
 struct SwapButton: View {
-    @Binding var payCurrency: CryptoCurrency
-    @Binding var receiveCurrency: CryptoCurrency
-    @Binding var payAmountString: String
-    @Binding var receiveAmountString: String
+    let viewModel: CurrencyConversionViewModel
 
     var body: some View {
         Button(action: {
-            (payCurrency, receiveCurrency) = (receiveCurrency, payCurrency)
-            (payAmountString, receiveAmountString) = (receiveAmountString, payAmountString)
+            viewModel.swapCurrencies()
         }) {
             Image(systemName: "arrow.up.arrow.down")
                 .font(.system(size: 20, weight: .bold))
@@ -270,17 +289,4 @@ struct CryptoExchangeView_Previews: PreviewProvider {
     }
 }
 
-// MARK: - Placeholder Image Extensions (if using custom images)
-// If you have actual image assets (e.g., ethereum_logo.png, bitcoin_logo.png) in your asset catalog,
-// you can use them directly: Image("ethereum_logo")
-// For this example, I've used SF Symbols as placeholders.
-
-// Example how you might define custom images if not using SF Symbols
-#if DEBUG
-//struct Image { // This is a placeholder to avoid errors if you don't have these images.
-//    static func ethereum_logo() -> SwiftUI.Image { SwiftUI.Image(systemName: "e.circle.fill") }
-//    static func bitcoin_logo() -> SwiftUI.Image { SwiftUI.Image(systemName: "b.circle.fill") }
-//    static func usdt_logo() -> SwiftUI.Image { SwiftUI.Image(systemName: "u.circle.fill") }
-//}
-#endif
 

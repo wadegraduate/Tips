@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Main View
 
 struct CurrencySearchListView: View {
-    @Binding var selectedCrypto: CryptoCurrency
+    @Binding var selectedCrypto: FiatCurrency
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = CurrencySearchListViewModel()
     
@@ -122,18 +122,14 @@ struct CurrencySearchListView: View {
 struct CryptoRow: View {
     let icon: String
     let name: String
-    let network: String
-    var address: String? = nil
     var amount: String? = nil
     var isFavorite: Bool = false
     let iconColor: Color
 
     // Convenience initializer
-    init(crypto: CryptoCurrency) {
+    init(crypto: FiatCurrency) {
         self.icon = crypto.icon
         self.name = crypto.name
-        self.network = crypto.network
-        self.address = crypto.address
         self.amount = crypto.amount
         self.isFavorite = crypto.isFavorite
         self.iconColor = crypto.iconColor
@@ -152,17 +148,6 @@ struct CryptoRow: View {
                     Text(name)
                         .font(.headline)
                         .foregroundColor(.white)
-                    Text(network)
-                        .font(.caption)
-                        .padding(4)
-                        .background(Color.gray.opacity(0.3))
-                        .cornerRadius(6)
-                        .foregroundColor(.gray)
-                }
-                if let addr = address {
-                    Text(addr)
-                        .font(.caption)
-                        .foregroundColor(.gray)
                 }
             }
             

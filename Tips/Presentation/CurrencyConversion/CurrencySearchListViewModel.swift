@@ -3,17 +3,12 @@ import SwiftUI
 class CurrencySearchListViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var selectedFilter: String = "All"
-    @Published var cryptos: [CryptoCurrency] = []
+    @Published var cryptos: [FiatCurrency] = []
     
     let filters = ["My", "All", "Hot", "USDⓈ", "Meme"]
     
     // Mock data
-    private let allCryptos: [CryptoCurrency] = [
-        CryptoCurrency(icon: "eth_icon", name: "ETH", network: "BEP20", address: "0x2170...f933f8", amount: "1", isFavorite: true, iconColor: .white),
-        CryptoCurrency(icon: "bnb_icon", name: "BNB", network: "BEP20", amount: "0.02779175", iconColor: .yellow),
-        CryptoCurrency(icon: "btc_icon", name: "BTC", network: "Bitcoin", iconColor: .orange),
-        CryptoCurrency(icon: "usdt_icon", name: "USDT", network: "ERC20", address: "0xdac1...831ec7", iconColor: .green)
-    ]
+    private let allCryptos: [FiatCurrency] = mockCurrency
     
     init() {
         self.cryptos = allCryptos
@@ -32,8 +27,7 @@ class CurrencySearchListViewModel: ObservableObject {
         }
         if !searchText.isEmpty {
             filtered = filtered.filter {
-                $0.name.lowercased().contains(searchText.lowercased()) ||
-                ($0.address?.lowercased().contains(searchText.lowercased()) ?? false)
+                $0.name.lowercased().contains(searchText.lowercased())
             }
         }
         self.cryptos = filtered

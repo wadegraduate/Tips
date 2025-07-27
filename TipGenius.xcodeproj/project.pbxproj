@@ -29,7 +29,9 @@
 		02ABE0602BB75FEE00FB27A0 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABE05F2BB75FEE00FB27A0 /* TaskItem.swift */; };
 		02ABE0622BB7628200FB27A0 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABE0612BB7628200FB27A0 /* TodoListViewModel.swift */; };
 		02ABE0642BB7674400FB27A0 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABE0632BB7674400FB27A0 /* TaskRow.swift */; };
-		02B6F5AE2E25E00400D3446A /* CryptoCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6F5AD2E25E00200D3446A /* CryptoCurrency.swift */; };
+		02B6F5AE2E25E00400D3446A /* FiatCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6F5AD2E25E00200D3446A /* FiatCurrency.swift */; };
+		02CB41A22E35DE8200802A3B /* CurrencyConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CB41A12E35DE8200802A3B /* CurrencyConversionViewModel.swift */; };
+		02CB41A42E35E00400802A3B /* CurrencyConversionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CB41A32E35DFEF00802A3B /* CurrencyConversionService.swift */; };
 		02CFB0D32E247A4600FB9A8B /* CurrencySearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFB0D22E247A4600FB9A8B /* CurrencySearchListViewModel.swift */; };
 		02DE03BB2B8AC0E3008FA65A /* tipsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE03BA2B8AC0E3008FA65A /* tipsUITests.swift */; };
 		02DE03BD2B8AC0E3008FA65A /* tipsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE03BC2B8AC0E3008FA65A /* tipsUITestsLaunchTests.swift */; };
@@ -98,8 +100,10 @@
 		02ABE05F2BB75FEE00FB27A0 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		02ABE0612BB7628200FB27A0 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
 		02ABE0632BB7674400FB27A0 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
-		02B6F5AD2E25E00200D3446A /* CryptoCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrency.swift; sourceTree = "<group>"; };
+		02B6F5AD2E25E00200D3446A /* FiatCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiatCurrency.swift; sourceTree = "<group>"; };
 		02C44A562B95893600C1E4BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Tips/Info.plist; sourceTree = "<group>"; };
+		02CB41A12E35DE8200802A3B /* CurrencyConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionViewModel.swift; sourceTree = "<group>"; };
+		02CB41A32E35DFEF00802A3B /* CurrencyConversionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionService.swift; sourceTree = "<group>"; };
 		02CFB0D22E247A4600FB9A8B /* CurrencySearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySearchListViewModel.swift; sourceTree = "<group>"; };
 		02DE039C2B8AC0E1008FA65A /* TipGenius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipGenius.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02DE03AC2B8AC0E3008FA65A /* TipGeniusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TipGeniusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +183,7 @@
 		02639E212DF4AB2C00D6CAF7 /* CurrencyConversion */ = {
 			isa = PBXGroup;
 			children = (
+				02CB41A12E35DE8200802A3B /* CurrencyConversionViewModel.swift */,
 				02CFB0D22E247A4600FB9A8B /* CurrencySearchListViewModel.swift */,
 				02639E1F2DF354B700D6CAF7 /* CurrencySearchListView.swift */,
 				02639E1D2DF3484E00D6CAF7 /* CurrencyConversionView.swift */,
@@ -253,7 +258,7 @@
 		02B6F5AC2E25DFEE00D3446A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				02B6F5AD2E25E00200D3446A /* CryptoCurrency.swift */,
+				02B6F5AD2E25E00200D3446A /* FiatCurrency.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 		02DE1A772BCDBAB20027CADB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				02CB41A32E35DFEF00802A3B /* CurrencyConversionService.swift */,
 				02DE1A782BCDBACC0027CADB /* TodoListService.swift */,
 			);
 			path = Domain;
@@ -476,11 +482,12 @@
 				02ABE0622BB7628200FB27A0 /* TodoListViewModel.swift in Sources */,
 				02ECE02B2CD9D5A3004335A0 /* FloatingButton.swift in Sources */,
 				02ABE0642BB7674400FB27A0 /* TaskRow.swift in Sources */,
-				02B6F5AE2E25E00400D3446A /* CryptoCurrency.swift in Sources */,
+				02B6F5AE2E25E00400D3446A /* FiatCurrency.swift in Sources */,
 				02639E202DF354C600D6CAF7 /* CurrencySearchListView.swift in Sources */,
 				02DE1A792BCDBACC0027CADB /* TodoListService.swift in Sources */,
 				02ABE0602BB75FEE00FB27A0 /* TaskItem.swift in Sources */,
 				0246E93B2CB4EDFF00E01320 /* NewToDoTaskSheetView.swift in Sources */,
+				02CB41A22E35DE8200802A3B /* CurrencyConversionViewModel.swift in Sources */,
 				02ABE0582BB75CE300FB27A0 /* MainTabBarItemView.swift in Sources */,
 				02DE03D32B8AC122008FA65A /* TipsApp.swift in Sources */,
 				0272AA712B8ACEA8000869F1 /* LabeledAmountView.swift in Sources */,
@@ -492,6 +499,7 @@
 				0246E94A2CBD99CC00E01320 /* Double+toString.swift in Sources */,
 				0272AA662B8AC716000869F1 /* CalculationView.swift in Sources */,
 				0295079D2CE1B382005961A9 /* StringHelper.swift in Sources */,
+				02CB41A42E35E00400802A3B /* CurrencyConversionService.swift in Sources */,
 				02CFB0D32E247A4600FB9A8B /* CurrencySearchListViewModel.swift in Sources */,
 				0246E9482CBD99CC00E01320 /* View+Keyboard.swift in Sources */,
 				0246E9372C27D47F00E01320 /* SchemaVersionManager.swift in Sources */,
