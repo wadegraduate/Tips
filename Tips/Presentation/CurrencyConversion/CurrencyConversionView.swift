@@ -20,8 +20,8 @@ struct CurrencyConversionView: View {
         NavigationStack {
             ZStack {
                 // Background color for the entire view
-                Color(red: 28/255, green: 28/255, blue: 30/255) // Approximate dark background color from image
-                    .ignoresSafeArea()
+//                Color(red: 28/255, green: 28/255, blue: 30/255) // Approximate dark background color from image
+//                    .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     PayView(
@@ -71,7 +71,7 @@ struct CurrencyConversionView: View {
                     Spacer()
                 }
             }
-            .foregroundColor(.white) // Default text color
+            //.foregroundColor(.white) // Default text color
             .navigationBarTitle(LocalizedString("Conversion"))
             .task {
                 await viewModel.fetchExchangeRate()
@@ -110,8 +110,8 @@ struct PayView: View {
             // Top row: "Pay" label and percentage buttons
             HStack {
                 Text("Pay")
-                    .font(.system(size: 20, weight: .semibold))
-                
+                    .foregroundStyle(.standardText)
+                    //.font(.system(size: 20, weight: .semibold))
                 Spacer()
                 
                 PercentageButton(label: "50%", action: {
@@ -142,14 +142,14 @@ struct PayView: View {
             }
             
             // Bottom row: Available balance
-            Text("Available balance : \(selectedCurrency.amount ?? "0") \(selectedCurrency.name)")
+            Text("Available balance : \(selectedCurrency.amount) \(selectedCurrency.name)")
                 .font(.caption)
                 .foregroundColor(.gray)
                 .padding([.leading, .bottom], 5) // Align with the currency selector
             
         }
         .padding()
-        .background(Color(white: 0.15)) // Darker gray for this section background
+        .background(.cardViewBackground) // Darker gray for this section background
         .cornerRadius(15)
     }
 }
@@ -169,6 +169,7 @@ struct ReceiveView: View {
             // Top row: "Receive" label
             HStack {
                 Text("Receive")
+                    .foregroundStyle(.standardText)
                     .font(.system(size: 20, weight: .semibold))
                 Spacer()
             }
@@ -192,20 +193,19 @@ struct ReceiveView: View {
                     .focused($focusedField, equals: .receive)
                 
             }
-            .background(Color(white: 0.15))
             .cornerRadius(12)
             .sheet(isPresented: $isShowingCurrencySheet) {
                 CurrencySearchListView(selectedCrypto: $selectedCurrency)
             }
             
             // Bottom row: Balance
-            Text("Balance : \(selectedCurrency.amount ?? "0") \(selectedCurrency.name)")
+            Text("Balance : \(selectedCurrency.amount) \(selectedCurrency.name)")
                 .font(.caption)
                 .foregroundColor(.gray)
                 .padding(.leading, 5)
         }
         .padding()
-        .background(Color(white: 0.15)) // Darker gray for this section background
+        .background(.cardViewBackground)
         .cornerRadius(15)
     }
 }
@@ -232,7 +232,7 @@ struct CurrencySelectorView: View {
                         Image(systemName: "chevron.down")
                             .font(.caption)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.standardText)
                 }
             }
         }
@@ -253,7 +253,7 @@ struct PercentageButton: View {
                 .font(.system(size: 12, weight: .medium))
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
-                .background(Color(white: 0.25)) // Darker gray for buttons
+                .background(.secondaryCardViewBackground) // Darker gray for buttons
                 .cornerRadius(8)
         }
         .buttonStyle(PlainButtonStyle()) // Removes default button styling if needed
@@ -285,7 +285,6 @@ struct SwapButton: View {
 struct CryptoExchangeView_Previews: PreviewProvider {
     static var previews: some View {
         CurrencyConversionView()
-            .preferredColorScheme(.dark) // Ensure preview is in dark mode
     }
 }
 

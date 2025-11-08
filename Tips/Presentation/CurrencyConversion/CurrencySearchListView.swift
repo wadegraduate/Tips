@@ -16,38 +16,40 @@ struct CurrencySearchListView: View {
     
     var body: some View {
         ZStack {
-            Color(red: 25/255, green: 25/255, blue: 28/255).edgesIgnoringSafeArea(.all)
+            // Background
+            Color.theme.background
+                .ignoresSafeArea()
             
             VStack(spacing: 20) {
                 // Header
                 HStack {
                     Text("Pay")
                         .font(.title2).bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(.standardText)
                         .frame(maxWidth: .infinity, alignment: .center)
-
                     Button(action: {
                         dismiss()
                     }) {
                         Image(systemName: "xmark")
                             .font(.title2)
-                            .foregroundColor(.white)
+                            .foregroundColor(.standardText)
                     }
                 }
                 .padding(.horizontal)
+                .padding(.top, 16)
                 
                 // Search Bar
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
                     TextField("Enter token name or token contract address", text: $viewModel.searchText)
-                        .foregroundColor(.white)
+                        .foregroundColor(.standardText)
                         .onChange(of: viewModel.searchText) { newValue in
                             viewModel.updateSearchText(newValue)
                         }
                 }
                 .padding()
-                .background(Color(red: 45/255, green: 45/255, blue: 48/255))
+                .background(.secondaryCardViewBackground)
                 .cornerRadius(12)
                 .padding(.horizontal)
                 
@@ -62,8 +64,8 @@ struct CurrencySearchListView: View {
                                     .font(.headline)
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 10)
-                                    .background(viewModel.selectedFilter == filter ? Color.blue : Color(red: 45/255, green: 45/255, blue: 48/255))
-                                    .foregroundColor(.white)
+                                    .background(viewModel.selectedFilter == filter ? Color.blue : .secondaryCardViewBackground)
+                                    .foregroundColor(.standardText)
                                     .cornerRadius(18)
                             }
                         }
@@ -71,26 +73,13 @@ struct CurrencySearchListView: View {
                     .padding(.horizontal)
                 }
                 
-                // Bank Banner
-                HStack {
-                    Text("Swap USD to cryptos via SafePal banking gateway with 0 service fee.")
-                        .font(.footnote)
-                        .foregroundColor(.white)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
-                }
-                .padding()
-                .background(Color(red: 45/255, green: 45/255, blue: 48/255))
-                .cornerRadius(12)
-                .padding(.horizontal)
 
                 // In Wallet Section
                 VStack {
                     HStack {
                         Text("In Wallet")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.standardText)
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -110,7 +99,6 @@ struct CurrencySearchListView: View {
                         }
                     }
                 }
-                
                 Spacer()
             }
         }
@@ -147,7 +135,7 @@ struct CryptoRow: View {
                 HStack {
                     Text(name)
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.standardText)
                 }
             }
             
@@ -156,7 +144,7 @@ struct CryptoRow: View {
             if let amt = amount {
                 Text(amt)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.standardText)
             }
             
             Image(systemName: isFavorite ? "star.fill" : "star")
