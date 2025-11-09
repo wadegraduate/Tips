@@ -112,7 +112,6 @@ struct CryptoRow: View {
     let name: String
     var amount: String? = nil
     var isFavorite: Bool = false
-    let iconColor: Color
 
     // Convenience initializer
     init(crypto: FiatCurrency) {
@@ -120,7 +119,6 @@ struct CryptoRow: View {
         self.name = crypto.name
         self.amount = crypto.amount
         self.isFavorite = crypto.isFavorite
-        self.iconColor = crypto.iconColor
     }
 
     var body: some View {
@@ -128,7 +126,6 @@ struct CryptoRow: View {
             Image(icon) // Placeholder for crypto icons
                 .resizable()
                 .frame(width: 40, height: 40)
-                .background(iconColor)
                 .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 4) {
@@ -161,5 +158,4 @@ struct CryptoPayView_Previews: PreviewProvider {
         CurrencySearchListView(selectedCrypto: .constant(.default))
     }
 }
-
 

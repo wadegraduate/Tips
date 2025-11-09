@@ -15,7 +15,7 @@ struct MainTabBarView: View {
         TabView(selection: $selectedTab) {
             CalculationView()
                 .tabItem {
-                    Label(LocalizedString("Tip Calculator"), systemImage: "dollarsign.circle")
+                    Label(LocalizedString("Calculator"), systemImage: "dollarsign.circle")
                 }
                 .tag(Tab.tipCalculator)
             
@@ -28,7 +28,7 @@ struct MainTabBarView: View {
             
             CurrencyConversionView()
                 .tabItem {
-                    Label(LocalizedString("Currency Conversion"), systemImage: "arrow.left.arrow.right.circle")
+                    Label(LocalizedString("Conversion"), systemImage: "arrow.left.arrow.right.circle")
                 }
                 .tag(Tab.currencyConversion)
         }

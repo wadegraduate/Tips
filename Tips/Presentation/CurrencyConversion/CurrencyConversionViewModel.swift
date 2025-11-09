@@ -12,7 +12,7 @@ import Combine
 class CurrencyConversionViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var payCurrency: FiatCurrency = .default
-    @Published var receiveCurrency: FiatCurrency = FiatCurrency(icon: "btc_icon", name: "BTC", amount: "0", iconColor: .orange)
+    @Published var receiveCurrency: FiatCurrency = FiatCurrency(icon: "hkd_icon", name: "HKD", amount: "0")
     @Published var payAmountString: String = "0"
     @Published var receiveAmountString: String = "0"
     @Published var isLoading: Bool = false
@@ -27,9 +27,9 @@ class CurrencyConversionViewModel: ObservableObject {
     
     // MARK: - Available Currencies
     let availableCurrencies: [FiatCurrency] = [
-        FiatCurrency(icon: "eth_icon", name: "ETH", amount: "1", isFavorite: true, iconColor: .white),
-        FiatCurrency(icon: "btc_icon", name: "BTC", amount: "0", iconColor: .orange),
-        FiatCurrency(icon: "usdt_icon", name: "USDT", amount: "1000.0", iconColor: .green)
+        FiatCurrency(icon: "eth_icon", name: "ETH", amount: "1", isFavorite: true),
+        FiatCurrency(icon: "btc_icon", name: "BTC", amount: "0"),
+        FiatCurrency(icon: "usdt_icon", name: "USDT", amount: "1000.0")
         // Add more currencies as needed
     ]
     
@@ -95,6 +95,7 @@ class CurrencyConversionViewModel: ObservableObject {
     func fetchExchangeRate() async {
         guard payCurrency.name != receiveCurrency.name else {
             exchangeRate = 1.0
+            errorMessage = nil
             return
         }
         
@@ -107,8 +108,15 @@ class CurrencyConversionViewModel: ObservableObject {
                 to: receiveCurrency.name
             )
             exchangeRate = rate
+            errorMessage = nil // Clear any previous errors on success
+        } catch let error as CurrencyConversionError {
+            // Handle service-specific errors with user-friendly messages
+            errorMessage = error.localizedDescription
+            exchangeRate = 1.0 // Reset to default on error
         } catch {
+            // Handle any other unexpected errors
             errorMessage = "Failed to fetch exchange rate: \(error.localizedDescription)"
+            exchangeRate = 1.0 // Reset to default on error
         }
         
         isLoading = false
@@ -123,7 +131,7 @@ class CurrencyConversionViewModel: ObservableObject {
         }
         
         let convertedAmount = amount * exchangeRate
-        receiveAmountString = String(format: "%.3f", convertedAmount)
+        receiveAmountString = String(format: "%.6f", convertedAmount)
     }
     
     private func updatePayAmount(receiveAmount: String, from receiveCurrency: FiatCurrency, to payCurrency: FiatCurrency) {
@@ -133,7 +141,7 @@ class CurrencyConversionViewModel: ObservableObject {
         }
         
         let convertedAmount = amount / exchangeRate
-        payAmountString = String(format: "%.3f", convertedAmount)
+        payAmountString = String(format: "%.6f", convertedAmount)
     }
 }
 

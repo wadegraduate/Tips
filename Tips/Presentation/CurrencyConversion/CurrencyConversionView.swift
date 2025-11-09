@@ -223,7 +223,6 @@ struct CurrencySelectorView: View {
                 Image(selectedCurrency.icon)
                     .resizable()
                     .frame(width: 30, height: 30)
-                    .background(selectedCurrency.iconColor)
                     .clipShape(Circle())
                 VStack(alignment: .leading) {
                     HStack {
